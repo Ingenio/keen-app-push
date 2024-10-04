@@ -32,10 +32,10 @@ dependencies:
   #   path: "../push_platform_interface"
   # push_android:
   #   path: "../push_android"
-  push_ios:
-    git:
-      url: git@github.com:Ingenio/keen-app-push.git
-      path: push_ios
+  #push_ios:
+  #  git:
+  #    url: git@github.com:Ingenio/keen-app-push.git
+  #    path: push_ios
     
 #    push_macos:
 #      path: "../push_macos"
