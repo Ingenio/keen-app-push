@@ -3,6 +3,8 @@ library push_platform;
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:push_platform_interface/src/serialization/push_api.dart';
@@ -116,7 +118,16 @@ class Push extends PlatformInterface {
   ///
   /// On Android, this is the FCM registration token
   /// On iOS, this is the APNs device token.
-  Future<String?> get token => _pushHostApi.getToken();
+  Future<String?> get token async {
+    try {
+      return await _pushHostApi.getToken();
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        debugPrint('Push: failed to retrieve FCM token: ${e.message}');
+      }
+      return null;
+    }
+  }
 
   VoidCallback? onOpenSettingsHandler;
 
